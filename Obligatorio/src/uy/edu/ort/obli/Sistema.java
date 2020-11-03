@@ -40,37 +40,37 @@ public class Sistema implements ISistema {
 	}
 
 	@Override
-	public Retorno registrarTramo(double coordXi, double coordYi, double coordXf, double coordYf, int metros) {
+	public Retorno registrarTramo(double coordXi, double coordYi, double coordXf, double coordYf, int metros, int minutos) {
 		return new Retorno(Resultado.NO_IMPLEMENTADA);
 	}
 
 	@Override
-	public Retorno registrarDelivery(String cedula, Double coordX, Double coordY) {
+	public Retorno registrarDelivery(String cedula, double coordX, double coordY) {
 		return new Retorno(Resultado.NO_IMPLEMENTADA);
 	}
 
 	@Override
-	public Retorno registrarMovil(String matricula, Double coordX, Double coordY) {
+	public Retorno registrarMovil(String matricula, double coordX, double coordY) {
 		return new Retorno(Resultado.NO_IMPLEMENTADA);
 	}
 
 	@Override
-	public Retorno movilMasCercano(Double coordXi, Double coordYi) {
+	public Retorno movilMasCercano(double coordXi, double coordYi) {
 		return new Retorno(Resultado.NO_IMPLEMENTADA);
 	}
 
 	@Override
-	public Retorno deliveryMasCercano(Double coordXi, Double coordYi) {
+	public Retorno deliveryMasCercano(double coordXi, double coordYi) {
 		return new Retorno(Resultado.NO_IMPLEMENTADA);
 	}
 
 	@Override
-	public Retorno caminoMinimoMovil(Double coordXi, Double coordYi, Double coordXf, Double coordYf) {
+	public Retorno caminoMinimoMovil(double coordXi, double coordYi, double coordXf, double coordYf) {
 		return new Retorno(Resultado.NO_IMPLEMENTADA);
 	}
 
 	@Override
-	public Retorno caminoMinimoDelivery(Double coordXi, Double coordYi, Double coordXf, Double coordYf) {
+	public Retorno caminoMinimoDelivery(double coordXi, double coordYi, double coordXf, double coordYf) {
 		return new Retorno(Resultado.NO_IMPLEMENTADA);
 	}
 

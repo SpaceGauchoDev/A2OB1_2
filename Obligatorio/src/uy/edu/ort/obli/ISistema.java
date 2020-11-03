@@ -1,36 +1,51 @@
 package uy.edu.ort.obli;
 
 public interface ISistema {
-
-	 Retorno inicializarSistema (int maxPuntos);
-	 
-	 Retorno destruirSistema();
-	 
-	 Retorno registrarUsuario(String email, String nombre, String password);
-
-	 Retorno buscarUsuario(String email);
-	 
-	 Retorno listarUsuarios();
-	 
-	 Retorno direccionesDeUsuario(String email);
-	 
-	 Retorno registrarEsquina(double coordX, double coordY);
-	 
-	 Retorno registrarDelivery(String cedula, Double coordX, Double coordY);
-	 
-	 Retorno registrarMovil(String matricula, Double coordX, Double coordY);
-
-	 Retorno registrarTramo(double coordXi, double coordYi, double
-			 coordXf, double coordYf, int metros);
-	 
-	 Retorno movilMasCercano(Double coordXi, Double coordYi);
-
-	 Retorno deliveryMasCercano(Double coordXi, Double coordYi);
-	 
-	 Retorno caminoMinimoMovil(Double coordXi, Double coordYi, Double coordXf, Double coordYf);
-	 
-	 Retorno caminoMinimoDelivery(Double coordXi, Double coordYi, Double coordXf, Double coordYf);
-	 
-	 Retorno dibujarMapa();
 	
+	// Restricción de eficiencia: no tiene
+	Retorno inicializarSistema (int maxPuntos);
+	 
+	// Restricción de eficiencia: no tiene
+	Retorno destruirSistema();
+	 
+	// Restricción de eficiencia: Esta operación deberá realizarse en orden (log n) promedio
+	Retorno registrarUsuario(String email, String nombre, String password);
+	
+	// Restricción de eficiencia: Esta operación deberá realizarse en orden (log n) promedio
+	Retorno buscarUsuario(String email);
+	 
+	// Restricción de eficiencia: Esta operación deberá realizarse en orden (n) promedio
+	Retorno listarUsuarios();
+	 
+	// Restricción de eficiencia: no tiene	
+	Retorno direccionesDeUsuario(String email);
+	 
+	// Restricción de eficiencia: no tiene
+	Retorno registrarEsquina(double coordX, double coordY);
+	 
+	// Restricción de eficiencia: no tiene
+	Retorno registrarDelivery(String cedula, double coordX, double coordY);
+	
+	// Restricción de eficiencia: no tiene
+	Retorno registrarMovil(String matricula, double coordX, double coordY);
+	
+	// José Sebastián Grattarola Rizzo, Tuesday, 3 de November de 2020, 09:38 
+	// Estimados, como están? Actualizamos la interfaz del sistema, ya que en el método registrarTramo faltaba el parámetro correspondiente al tiempo (costo en minutos)
+	// Restricción de eficiencia: ????
+	Retorno registrarTramo(double coordXi, double coordYi, double coordXf, double coordYf, int metros, int minutos);
+	 
+	// Restricción de eficiencia: ????	
+	Retorno movilMasCercano(double coordXi, double coordYi);
+	
+	// Restricción de eficiencia: ????
+	Retorno deliveryMasCercano(double coordXi, double coordYi);
+	 
+	// Restricción de eficiencia: ????	
+	Retorno caminoMinimoMovil(double coordXi, double coordYi, double coordXf, double coordYf);
+
+	// Restricción de eficiencia: ????	
+	Retorno caminoMinimoDelivery(double coordXi, double coordYi, double coordXf, double coordYf);
+
+	// Restricción de eficiencia: ????
+	Retorno dibujarMapa();
 }
