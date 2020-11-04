@@ -1,4 +1,4 @@
-package mda_negocio;
+package mda_estructuras;
 
 public class Movil {
 	public String matricula;

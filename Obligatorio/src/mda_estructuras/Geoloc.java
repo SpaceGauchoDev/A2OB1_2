@@ -1,5 +1,4 @@
-package mda_negocio;
-import mda_estructuras.ParDouble;
+package mda_estructuras;
 
 public class Geoloc {
 	public int id;
