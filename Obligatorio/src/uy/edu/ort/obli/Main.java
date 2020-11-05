@@ -22,17 +22,44 @@ public class Main {
 		I.Log(l.buscarPrimerIndiceDeDato("comu"));
 		*/
 		
+		/*
 		ABB_Usuarios arbol = new ABB_Usuarios();
 		
-		arbol.InsertarUsuario("a@gmail.com", "manuel", "123");
-		arbol.InsertarUsuario("b@gmail.com", "manuel", "123");
-		arbol.InsertarUsuario("c@gmail.com", "manuel", "123");
-		arbol.InsertarUsuario("d@gmail.com", "manuel", "123");
-		arbol.InsertarUsuario("e@gmail.com", "manuel", "123");
-		arbol.InsertarUsuario("f@gmail.com", "manuel", "123");
+		arbol.insertarUsuario("a@gmail.com", "manuel", "123");
+		arbol.insertarUsuario("b@gmail.com", "manuel", "123");
+		arbol.insertarUsuario("c@gmail.com", "manuel", "123");
+		arbol.insertarUsuario("d@gmail.com", "manuel", "123");
+		arbol.insertarUsuario("e@gmail.com", "manuel", "123");
+		arbol.insertarUsuario("f@gmail.com", "manuel", "123");
+		
+		ResultadoBusquedaUsuario busqueda = arbol.buscarUsuario("b@gmail.com");
+		
+		if(busqueda.resultado) {
+			I.Log("usuario encontrado :)");
+			I.Log("iteraciones : " + busqueda.iteraciones);
+		}else {
+			I.Log("usuario no encontrado ):");
+			I.Log("iteraciones : " + busqueda.iteraciones);
+		}
+		*/
+		
+		ListaDestinosVisitados l = new ListaDestinosVisitados(ListaDestinosVisitados.Dir.Descendente);
+		
+		Geoloc g1 = new Geoloc(15, 16);
+		Geoloc g2 = new Geoloc(17, 3);
+		Geoloc g3 = new Geoloc(-50, 18);
+		//Geoloc g4 = new Geoloc(15, 16);
+		//Geoloc g5 = new Geoloc(15, 16);
+
+		l.insertarOIncrementar(g1);
+		l.insertarOIncrementar(g1);
+		l.insertarOIncrementar(g2);
+		l.insertarOIncrementar(g2);
+		l.insertarOIncrementar(g2);
+		
+		l.imprimirAscendenteNewLine();
 		
 		I.Log("puto");
-
 	}
 
 }

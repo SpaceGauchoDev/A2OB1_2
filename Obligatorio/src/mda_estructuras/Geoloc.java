@@ -1,10 +1,8 @@
 package mda_estructuras;
 
 public class Geoloc {
-	public int id;
-	public ParDouble latLong;
-	
-	
+	double lat;
+	double lon;
 	/*
 	                  ,_   .  ._. _.  .
 	           , _-\','|~\~      ~/      ;-'_   _-'     ,;_;_,    ~~-
@@ -30,12 +28,17 @@ public class Geoloc {
 	                      ~'              
 	 */
 	
-	
+	public boolean esMismaGeoloc(double pLat, double pLon) {
+		return (pLat == lat && pLon == lon);
+	}
 	
 	public Geoloc() {
-		id = -1;
-		latLong = new ParDouble();
-		latLong.y = 0;
-		latLong.x = 0;
+		lat = 0;
+		lon = 0;
+	}
+	
+	public Geoloc(double pLat, double pLon) {
+		lat = pLat;
+		lon = pLon;
 	}
 }

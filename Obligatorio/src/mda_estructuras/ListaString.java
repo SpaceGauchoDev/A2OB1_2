@@ -93,6 +93,62 @@ public class ListaString{
 			I.Log(s);
 		}
 	}
+	
+	public void imprimirAscendente(String pSeparador, boolean pUsarSeparador,  String pFinal, boolean pUsarFinal) {
+		if(largo == 0) {
+			I.Log("lista vacía.");
+		}else {
+			NodoLista nodoBuscador = inicio;
+			StringBuilder s = new StringBuilder();
+			s.append(nodoBuscador.datoString);
+			if(pUsarSeparador) {
+				s.append(pSeparador);				
+			}
+			while (nodoBuscador.sig != null) {
+				nodoBuscador = nodoBuscador.sig;
+				s.append(nodoBuscador.datoString);
+				
+				if(pUsarSeparador) {
+					s.append(pSeparador);				
+				}			}
+			//borramos el ultimo separador y agregamos un punto.
+			if(pUsarSeparador) {
+				s.delete(s.length() -pSeparador.length() , s.length());				
+			}
+			if(pUsarFinal) {
+				s.append(pFinal);				
+			}
+			I.Log(s);
+		}
+	}
+	
+	public String concatenarAscendente(String pSeparador, boolean pUsarSeparador,  String pFinal, boolean pUsarFinal) {
+		if(largo == 0) {
+			return ("lista vacía.");
+		}else {
+			NodoLista nodoBuscador = inicio;
+			StringBuilder s = new StringBuilder();
+			s.append(nodoBuscador.datoString);
+			if(pUsarSeparador) {
+				s.append(pSeparador);				
+			}
+			while (nodoBuscador.sig != null) {
+				nodoBuscador = nodoBuscador.sig;
+				s.append(nodoBuscador.datoString);
+				
+				if(pUsarSeparador) {
+					s.append(pSeparador);				
+				}			}
+			//borramos el ultimo separador y agregamos un punto.
+			if(pUsarSeparador) {
+				s.delete(s.length() -pSeparador.length() , s.length());				
+			}
+			if(pUsarFinal) {
+				s.append(pFinal);				
+			}
+			return s.toString();
+		}
+	}		
 
 	public void imprimirDescendente() {
 		if(largo == 0) {

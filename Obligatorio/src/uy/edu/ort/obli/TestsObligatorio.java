@@ -39,17 +39,11 @@ public class TestsObligatorio {
 	public void testRegistroUsuarioError1() {
 		sistema.inicializarSistema(10);
 		//Formatos de Email incorrectos
-		assertEquals(Retorno.Resultado.ERROR_1, 
-				sistema.registrarUsuario("11111", "a","").resultado); 
-		assertEquals(Retorno.Resultado.ERROR_1, 
-				sistema.registrarUsuario("aaaaa", "a","").resultado);
-		assertEquals(Retorno.Resultado.ERROR_1, 
-				sistema.registrarUsuario("rrr@", "a","").resultado);
-		assertEquals(Retorno.Resultado.ERROR_1, 
-				sistema.registrarUsuario("@wwwww", "a","").resultado);
-		assertEquals(Retorno.Resultado.ERROR_1, 
-				sistema.registrarUsuario("a@b", "a","").resultado);
-
+		assertEquals(Retorno.Resultado.ERROR_1,sistema.registrarUsuario("11111", "a","").resultado); 
+		assertEquals(Retorno.Resultado.ERROR_1,sistema.registrarUsuario("aaaaa", "a","").resultado);
+		assertEquals(Retorno.Resultado.ERROR_1,sistema.registrarUsuario("rrr@", "a","").resultado);
+		assertEquals(Retorno.Resultado.ERROR_1,sistema.registrarUsuario("@wwwww", "a","").resultado);
+		assertEquals(Retorno.Resultado.ERROR_1,sistema.registrarUsuario("a@b", "a","").resultado);
 	}
 	
 	@Test
