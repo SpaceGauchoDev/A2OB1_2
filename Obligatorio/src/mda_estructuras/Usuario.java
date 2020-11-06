@@ -8,6 +8,8 @@ public class Usuario {
 	public String nombre;
 	public String password;
 	
+	public ListaDestinosVisitados destinosVisitados;
+	
 	public Geoloc ubicacionActual;
 	
 	public String infoUsuario() {
@@ -36,6 +38,7 @@ public class Usuario {
 		nombre = "noInizializado";
 		password = "noInizializado";
 		ubicacionActual = new Geoloc();
+		destinosVisitados = new ListaDestinosVisitados(ListaDestinosVisitados.Dir.Descendente);
 	}
 
 }

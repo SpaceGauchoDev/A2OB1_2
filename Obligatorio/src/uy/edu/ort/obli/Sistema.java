@@ -70,6 +70,7 @@ public class Sistema implements ISistema {
 	}
 
 	//TODO: preguntar si debería haber casos de error si el arbol no tiene datos
+	//TODO: tecnicamente infoUsuarios() toma O 2*(n), 1(n) para recopilar todos los datos de usuarios en una lista y 1(n) para concatenar la lista en un string para devolver.
 	@Override
 	public Retorno listarUsuarios() {
 		Retorno r = new Retorno(Resultado.OK);
@@ -80,7 +81,22 @@ public class Sistema implements ISistema {
 
 	@Override
 	public Retorno direccionesDeUsuario(String email) {
-		return new Retorno(Resultado.NO_IMPLEMENTADA);
+		Retorno r;
+		
+		if(!Usuario.validarEmail(email)) {
+			r = new Retorno(Resultado.ERROR_1);
+			return r;
+		}
+		
+		ResultadoBusquedaUsuario busqueda = arbolDeUsuarios.buscarUsuario(email);
+		if(busqueda.resultado) {
+			r = new Retorno(Resultado.OK);
+			r.valorString = busqueda.usuario.destinosVisitados.concatenarAscendente("|", true, "", false);
+			return r;			
+		}else {
+			r = new Retorno(Resultado.ERROR_2);
+			return r;
+		}
 	}
 
 	@Override

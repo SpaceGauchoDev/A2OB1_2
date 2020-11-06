@@ -14,7 +14,8 @@ public class DestinoVisitado {
 	}
 	
 	public String toString() {
-		return " lat: " + lat + " ; "  + " lon: " + lon + " ; " + " cant:  " + cantidadDeVecesVisitado;
+		//return " lat: " + lat + " ; "  + " lon: " + lon + " ; " + " cant:  " + cantidadDeVecesVisitado;
+		return lat + ";" + lon;
 	}
 	
 	public DestinoVisitado() {

@@ -6,11 +6,9 @@ public class ListaDestinosVisitados {
 	
 	NodoLista inicio;
 	int largo;
-	Dir orden;
+	public Dir orden;
 	
-	
-	
-	public int buscarPrimerIndiceDeDato(Geoloc pDato) {
+	private int buscarPrimerIndiceDeDato(Geoloc pDato) {
 		int resultado;// = -1;
 		if (largo == 0) {
 			resultado = -1;
@@ -44,7 +42,7 @@ public class ListaDestinosVisitados {
 	}
 	
 	
-	public NodoLista buscarNodoEnIndice(int pIndice) {
+	private NodoLista buscarNodoEnIndice(int pIndice) {
 		NodoLista resultado = null;
 		if(pIndice >= largo) {
 			resultado = null;;
@@ -256,7 +254,7 @@ public class ListaDestinosVisitados {
 	}
 	
 	
-	public void intercambiarNodosEnIndice(int p1, int p2) {
+	private void intercambiarNodosEnIndice(int p1, int p2) {
 		if(p1 < 0 || p1 > largo || p2 < 0 || p2 > largo){
 			I.Log("Al menos una posición está de fuera de la lista.");
 		}else {

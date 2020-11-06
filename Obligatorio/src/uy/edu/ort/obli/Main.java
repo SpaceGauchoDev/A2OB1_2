@@ -22,7 +22,7 @@ public class Main {
 		I.Log(l.buscarPrimerIndiceDeDato("comu"));
 		*/
 		
-		/*
+		
 		ABB_Usuarios arbol = new ABB_Usuarios();
 		
 		arbol.insertarUsuario("a@gmail.com", "manuel", "123");
@@ -32,17 +32,26 @@ public class Main {
 		arbol.insertarUsuario("e@gmail.com", "manuel", "123");
 		arbol.insertarUsuario("f@gmail.com", "manuel", "123");
 		
-		ResultadoBusquedaUsuario busqueda = arbol.buscarUsuario("b@gmail.com");
+		ResultadoBusquedaUsuario b = arbol.buscarUsuario("b@gmail.com");
 		
-		if(busqueda.resultado) {
-			I.Log("usuario encontrado :)");
-			I.Log("iteraciones : " + busqueda.iteraciones);
-		}else {
-			I.Log("usuario no encontrado ):");
-			I.Log("iteraciones : " + busqueda.iteraciones);
+		if(b.resultado) {
+			Geoloc g1 = new Geoloc(15, 16);
+			Geoloc g2 = new Geoloc(17, 3);
+			Geoloc g3 = new Geoloc(-50, 18);
+			b.usuario.destinosVisitados.insertarOIncrementar(g1);
+			b.usuario.destinosVisitados.insertarOIncrementar(g1);
+			b.usuario.destinosVisitados.insertarOIncrementar(g1);
+			b.usuario.destinosVisitados.insertarOIncrementar(g2);
+			b.usuario.destinosVisitados.insertarOIncrementar(g3);
+			b.usuario.destinosVisitados.insertarOIncrementar(g3);
 		}
-		*/
 		
+		ResultadoBusquedaUsuario b2 = arbol.buscarUsuario("b@gmail.com");
+		if(b2.resultado) {
+			b2.usuario.destinosVisitados.imprimirAscendenteNewLine();
+		}
+		
+		/*
 		ListaDestinosVisitados l = new ListaDestinosVisitados(ListaDestinosVisitados.Dir.Descendente);
 		
 		Geoloc g1 = new Geoloc(15, 16);
@@ -58,6 +67,7 @@ public class Main {
 		l.insertarOIncrementar(g2);
 		
 		l.imprimirAscendenteNewLine();
+		*/
 		
 		I.Log("puto");
 	}

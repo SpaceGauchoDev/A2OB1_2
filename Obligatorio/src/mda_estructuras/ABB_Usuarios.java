@@ -112,10 +112,32 @@ public class ABB_Usuarios {
 	public boolean insertarUsuario (String pEmail, String pNombre, String pPassword) {
 		boolean resultado = false;
 		
-		raiz = insertarABB(raiz, pEmail, pNombre, pPassword);
+		// sanity check, dependiendo del sistema que use esta lista este checkeo puede ser redundante
+		ResultadoBusquedaUsuario rb = buscarUsuario(pEmail); 
+		boolean emailValido = Usuario.validarEmail(pEmail);
+		if(!rb.resultado && emailValido) {
+			raiz = insertarABB(raiz, pEmail, pNombre, pPassword);
+			resultado = true;
+		}
 		
 		return resultado;
 	}
+	
+	
+	public boolean insertarUsuario (Usuario pUsuario) {
+		boolean resultado = false;
+
+		// sanity check, dependiendo del sistema que use esta lista este checkeo puede ser redundante
+		ResultadoBusquedaUsuario rb = buscarUsuario(pUsuario.email); 
+		boolean emailValido = Usuario.validarEmail(pUsuario.email);
+		if(!rb.resultado && emailValido) {
+			raiz = insertarABB(raiz, pUsuario);
+			resultado = true;
+		}
+		
+		return resultado;
+	}	
+	
 	
 	private NodoABB rebalancear(NodoABB pNodo) {
 		if (pNodo.balance == -2) {
@@ -247,6 +269,39 @@ public class ABB_Usuarios {
 		
 		return rebalancear(pNodo);
 	}
+	
+	private NodoABB insertarABB(NodoABB pNodo, Usuario pUsuario) {
+		// nodo raiz o nodo hoja
+		if (pNodo == null) {
+			
+			NodoABB nodo = new NodoABB();
+			nodo.datoUsuario = pUsuario;
+				
+			cantidadDeUsuarios++; 
+			I.Log("inserta!");
+			
+			return nodo;
+		}
+		
+		// buscamos el orden de comparación
+		Abecedario abc = new Abecedario();
+		int orden = abc.compararStrings(pUsuario.email, pNodo.datoUsuario.email, Abecedario.Dir.Descendente);
+		
+		if(orden < 0) {
+			// el nuevo valor es menor que el actual por lo que debería ir hacia la izquierda
+			pNodo.izq = insertarABB(pNodo.izq, pUsuario);
+		} else if(orden > 0) {
+			// el nuevo valor es mayor que el actual por lo que debería ir hacia la derecha
+			pNodo.der = insertarABB(pNodo.der, pUsuario);
+		} else {
+			// el nuevo valor es el mismo valor que el valor actual, por lo que no deberia insertarse! 
+			I.Log("Tratando de insertar un nodo que ya existe!");
+		}
+		
+		actualizarNodo(pNodo);
+		
+		return rebalancear(pNodo);
+	}	
 	
 
 	public ABB_Usuarios() {
