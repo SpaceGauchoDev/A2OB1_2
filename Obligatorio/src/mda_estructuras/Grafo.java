@@ -1,5 +1,7 @@
 package mda_estructuras;
 
+import mda_utilidades.I;
+
 public class Grafo {
 	public int cantidadDeVertices;
 	public int verticesInicializados;
@@ -29,7 +31,7 @@ public class Grafo {
 	}
 	
 	// devuelve AristaGrafo como medio conveniente de devolver pares de datos de vertices
-	private AristaGrafo existenParDeVerticesInicializados(Geoloc pPosA, Geoloc pPosB) {
+	public AristaGrafo existenParDeVerticesInicializados(Geoloc pPosA, Geoloc pPosB) {
 		if(pPosA == null || pPosB == null) {
 			return null;
 		}
@@ -74,6 +76,7 @@ public class Grafo {
 		nuevoVertice.matriculaMovil = pMatricula;
 		nuevoVertice.tipoDeVertice = VerticeGrafo.TipoDeVertice.Movil;
 		nuevoVertice.indice = verticesInicializados;
+		nuevoVertice.activo = true;
 		
 		vertices[verticesInicializados] = nuevoVertice;
 		verticesInicializados++;
@@ -91,6 +94,7 @@ public class Grafo {
 		nuevoVertice.cedulaDelivery = pCedula;
 		nuevoVertice.tipoDeVertice = VerticeGrafo.TipoDeVertice.Delivery;
 		nuevoVertice.indice = verticesInicializados;
+		nuevoVertice.activo = true;
 		
 		vertices[verticesInicializados] = nuevoVertice;
 		verticesInicializados++;
@@ -104,33 +108,30 @@ public class Grafo {
 	/*VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV*/
 
 
-	public AristaGrafo existeArista(Geoloc pPosA, Geoloc pPosB) {
-		AristaGrafo aristaIda = null;
-		AristaGrafo aristaVuelta = null;
+	public boolean existeArista(Geoloc pPosA, Geoloc pPosB) {
+		I.Log("existeArista?");
 		
-		AristaGrafo aristaTempIda = new AristaGrafo();
-		aristaTempIda.a.posicion = pPosA;
-		aristaTempIda.b.posicion = pPosB;
-		
-		AristaGrafo aristaTempVuelta = new AristaGrafo();
-		aristaTempVuelta.a.posicion = pPosB;
-		aristaTempVuelta.b.posicion = pPosA;
+		boolean encontroIda = false;
+		boolean encontroVuelta = false;
 
-		
 		for (int i = 0; i < verticesInicializados; i++) {
 			ListaAristas lista = aristasPorVertice[i];
 			if(lista != null) {
-				aristaIda = lista.contieneArista(aristaTempIda);
-				aristaVuelta = lista.contieneArista(aristaTempVuelta);
+				if(lista.obtenerDatoArista(pPosA.lat, pPosA.lon, pPosB.lat, pPosB.lon) != null) {
+					encontroIda = true;
+				}
+				
+				if(lista.obtenerDatoArista(pPosB.lat, pPosB.lon, pPosA.lat, pPosA.lon) != null) {
+					encontroVuelta = true;
+				}
 			}
 			
-			if(aristaIda != null && aristaVuelta != null) {
+			if(encontroIda && encontroVuelta) {
 				break;
 			}
-			
 		}
 		
-		return aristaIda;
+		return encontroIda && encontroVuelta;
 	}
 	
 	
@@ -141,10 +142,10 @@ public class Grafo {
 		}
 		
 		AristaGrafo parDeVertices = existenParDeVerticesInicializados(pPosA, pPosB);
-		AristaGrafo existeArista = existeArista(pPosA, pPosB);
+		boolean existeArista = existeArista(pPosA, pPosB);
 		
 		// si los vertices no han sido inicializados o la arista ya existe, no continuamos
-		if(parDeVertices == null || existeArista != null) {
+		if(parDeVertices == null || existeArista) {
 			return false;
 		}
 		

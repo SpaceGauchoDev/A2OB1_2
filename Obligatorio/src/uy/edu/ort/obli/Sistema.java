@@ -1,14 +1,18 @@
 package uy.edu.ort.obli;
 import mda_estructuras.*;
+import mda_utilidades.I;
 import uy.edu.ort.obli.Retorno.Resultado;
 
 public class Sistema implements ISistema {
 	ABB_Usuarios arbolDeUsuarios;
+	Grafo mapa;
 	
 	@Override
 	public Retorno inicializarSistema(int maxPuntos) {
 		Retorno r = new Retorno(Resultado.OK);
+		
 		arbolDeUsuarios = new ABB_Usuarios();
+		mapa = new Grafo(maxPuntos);
 		
 		return r;
 	}
@@ -16,7 +20,9 @@ public class Sistema implements ISistema {
 	@Override
 	public Retorno destruirSistema() {
 		Retorno r = new Retorno(Resultado.OK);
+		
 		arbolDeUsuarios = null;
+		mapa = null;
 		
 		return r;
 	}
@@ -101,22 +107,105 @@ public class Sistema implements ISistema {
 
 	@Override
 	public Retorno registrarEsquina(double coordX, double coordY) {
-		return new Retorno(Resultado.NO_IMPLEMENTADA);
+		Retorno r;
+		if(mapa.verticesInicializados == mapa.cantidadDeVertices) {
+			r = new Retorno(Resultado.ERROR_1);	
+			return r;
+		}
+		
+		Geoloc nuevaPosEsquina = new Geoloc();
+		nuevaPosEsquina.lat = coordY;
+		nuevaPosEsquina.lon = coordX;
+		
+		if(mapa.existeVerticeInicializado(nuevaPosEsquina) != null) {
+			r = new Retorno(Resultado.ERROR_2);	
+			return r;
+		}
+		
+		mapa.inicializarVerticeEsquina(nuevaPosEsquina);
+		r = new Retorno(Resultado.OK);
+		return r;
 	}
 
 	@Override
 	public Retorno registrarTramo(double coordXi, double coordYi, double coordXf, double coordYf, int metros, int minutos) {
-		return new Retorno(Resultado.NO_IMPLEMENTADA);
+		Retorno r;
+		
+		if(metros <= 0) {
+			r = new Retorno(Resultado.ERROR_1);	
+			return r;
+		}
+		
+		if(minutos <= 0) {
+			r = new Retorno(Resultado.ERROR_2);	
+			return r;
+		}
+		
+		Geoloc geoI = new Geoloc();
+		geoI.lat = coordYi;
+		geoI.lon = coordXi;
+		
+		Geoloc geoF = new Geoloc();
+		geoF.lat = coordYf;
+		geoF.lon = coordXf;
+		
+		if(mapa.existenParDeVerticesInicializados(geoI, geoF) == null) {
+			r = new Retorno(Resultado.ERROR_3);	
+			return r;
+		}
+		
+		if(mapa.existeArista(geoI, geoF)) {
+			r = new Retorno(Resultado.ERROR_4);
+			return r;
+		}
+		
+		r = new Retorno(Resultado.OK);
+		mapa.crearArista(geoI, geoF, metros, minutos);
+		return r;
 	}
 
 	@Override
 	public Retorno registrarDelivery(String cedula, double coordX, double coordY) {
-		return new Retorno(Resultado.NO_IMPLEMENTADA);
+		Retorno r;
+		if(mapa.verticesInicializados == mapa.cantidadDeVertices) {
+			r = new Retorno(Resultado.ERROR_1);	
+			return r;
+		}
+		
+		Geoloc nuevaPosDelivery = new Geoloc();
+		nuevaPosDelivery.lat = coordY;
+		nuevaPosDelivery.lon = coordX;
+		
+		if(mapa.existeVerticeInicializado(nuevaPosDelivery) != null) {
+			r = new Retorno(Resultado.ERROR_2);	
+			return r;
+		}
+		
+		mapa.inicializarVerticeDelivery(nuevaPosDelivery, cedula);
+		r = new Retorno(Resultado.OK);
+		return r;
 	}
 
 	@Override
 	public Retorno registrarMovil(String matricula, double coordX, double coordY) {
-		return new Retorno(Resultado.NO_IMPLEMENTADA);
+		Retorno r;
+		if(mapa.verticesInicializados == mapa.cantidadDeVertices) {
+			r = new Retorno(Resultado.ERROR_1);	
+			return r;
+		}
+		
+		Geoloc nuevaPosMovil = new Geoloc();
+		nuevaPosMovil.lat = coordY;
+		nuevaPosMovil.lon = coordX;
+		
+		if(mapa.existeVerticeInicializado(nuevaPosMovil) != null) {
+			r = new Retorno(Resultado.ERROR_2);	
+			return r;
+		}
+		
+		mapa.inicializarVerticeMovil(nuevaPosMovil, matricula);
+		r = new Retorno(Resultado.OK);
+		return r;
 	}
 
 	@Override
@@ -130,7 +219,7 @@ public class Sistema implements ISistema {
 	}
 
 	@Override
-	public Retorno caminoMinimoMovil(double coordXi, double coordYi, double coordXf, double coordYf) {
+	public Retorno caminoMinimoMovil(Double coordXi, Double coordYi, Double coordXf, Double coordYf, String email) {
 		return new Retorno(Resultado.NO_IMPLEMENTADA);
 	}
 

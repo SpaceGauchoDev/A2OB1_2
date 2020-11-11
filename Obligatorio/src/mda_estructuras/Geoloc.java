@@ -1,8 +1,8 @@
 package mda_estructuras;
 
 public class Geoloc {
-	double lat;
-	double lon;
+	public double lat;
+	public double lon;
 	/*
 	                  ,_   .  ._. _.  .
 	           , _-\','|~\~      ~/      ;-'_   _-'     ,;_;_,    ~~-

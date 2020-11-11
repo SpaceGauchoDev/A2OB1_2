@@ -1,4 +1,5 @@
 package uy.edu.ort.obli;
+
 import mda_estructuras.*;
 import mda_utilidades.*;
 
@@ -7,52 +8,50 @@ public class Main {
 	public static void main(String[] args) {
 		I.Log("Start");
 		
-		ABB_Usuarios arbol = new ABB_Usuarios();
+		Grafo mapa = new Grafo(10);
 		
-		arbol.insertarUsuario("a@gmail.com", "manuel", "123");
-		arbol.insertarUsuario("b@gmail.com", "manuel", "123");
-		arbol.insertarUsuario("c@gmail.com", "manuel", "123");
-		arbol.insertarUsuario("d@gmail.com", "manuel", "123");
-		arbol.insertarUsuario("e@gmail.com", "manuel", "123");
-		arbol.insertarUsuario("f@gmail.com", "manuel", "123");
+		Geoloc g1 = new Geoloc(1.0,1.0);
+		mapa.inicializarVerticeEsquina(g1);
 		
-		ResultadoBusquedaUsuario b = arbol.buscarUsuario("b@gmail.com");
+		Geoloc g2 = new Geoloc(2.0,2.0);
+		mapa.inicializarVerticeEsquina(g2);
+
+		Geoloc g3 = new Geoloc(3.0,3.0);
+		mapa.inicializarVerticeEsquina(g3);
 		
-		if(b.resultado) {
-			Geoloc g1 = new Geoloc(15, 16);
-			Geoloc g2 = new Geoloc(17, 3);
-			Geoloc g3 = new Geoloc(-50, 18);
-			b.usuario.destinosVisitados.insertarOIncrementar(g1);
-			b.usuario.destinosVisitados.insertarOIncrementar(g1);
-			b.usuario.destinosVisitados.insertarOIncrementar(g1);
-			b.usuario.destinosVisitados.insertarOIncrementar(g2);
-			b.usuario.destinosVisitados.insertarOIncrementar(g3);
-			b.usuario.destinosVisitados.insertarOIncrementar(g3);
-		}
+		Geoloc g4 = new Geoloc(4.0,4.0);
+		mapa.inicializarVerticeEsquina(g4);
 		
-		ResultadoBusquedaUsuario b2 = arbol.buscarUsuario("b@gmail.com");
-		if(b2.resultado) {
-			b2.usuario.destinosVisitados.imprimirAscendenteNewLine();
+		mapa.crearArista(g1, g2, 10, 10);
+		
+		I.Log("ble");
+		
+		boolean busqueda1 = mapa.existeArista(g1, g2);
+		//AristaGrafo busqueda2 = mapa.existeArista(g3, g4);
+		//AristaGrafo busqueda3 = mapa.existeArista(g2, g3);
+		
+		if(busqueda1) {
+			I.Log("busqueda 1 encontro!");
+		}else {
+			I.Log("busqueda 1 no encontro!");
 		}
 		
 		/*
-		ListaDestinosVisitados l = new ListaDestinosVisitados(ListaDestinosVisitados.Dir.Descendente);
+		if(busqueda2 != null) {
+			I.Log("busqueda 2 encontro!");
+		}else {
+			I.Log("busqueda 2 no encontro!");
+		}
 		
-		Geoloc g1 = new Geoloc(15, 16);
-		Geoloc g2 = new Geoloc(17, 3);
-		Geoloc g3 = new Geoloc(-50, 18);
-		//Geoloc g4 = new Geoloc(15, 16);
-		//Geoloc g5 = new Geoloc(15, 16);
-
-		l.insertarOIncrementar(g1);
-		l.insertarOIncrementar(g1);
-		l.insertarOIncrementar(g2);
-		l.insertarOIncrementar(g2);
-		l.insertarOIncrementar(g2);
-		
-		l.imprimirAscendenteNewLine();
+		if(busqueda3 != null) {
+			I.Log("busqueda 3 encontro!");
+		}else {
+			I.Log("busqueda 3 no encontro!");
+		}
 		*/
-		
+
+
+		I.Log("preEnd");
 		I.Log("End");
 	}
 

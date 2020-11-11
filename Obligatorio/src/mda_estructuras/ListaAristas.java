@@ -6,6 +6,7 @@ public class ListaAristas {
 	int largo;
 	
 	
+	/*¡¡ NO USAR ESTE METODO, CONTIENE ERRORES !! */
 	public AristaGrafo contieneArista(AristaGrafo pArista) {
 		AristaGrafo resultado = null;
 		if (largo == 0) {
@@ -38,6 +39,26 @@ public class ListaAristas {
 		}
 		
 		return resultado;
+	}
+	
+	public AristaGrafo obtenerDatoArista(double pXI, double pYI, double pXF, double pYF) {
+		AristaGrafo a = null;
+		
+		NodoLista nodoBuscador = inicio;
+		
+		while (a == null && nodoBuscador != null) {
+			if(		nodoBuscador.datoArista.a.posicion.lat == pXI &&
+					nodoBuscador.datoArista.a.posicion.lon == pYI &&
+					nodoBuscador.datoArista.b.posicion.lat == pXF &&
+					nodoBuscador.datoArista.b.posicion.lon == pYF
+					) {
+				a = nodoBuscador.datoArista;
+			}else {
+				nodoBuscador = nodoBuscador.sig;
+			}
+		}
+		
+		return a;
 	}
 	
 	
@@ -200,10 +221,10 @@ public class ListaAristas {
 		}
 	}
 
-	public void insertarAlFinal(AristaGrafo pDato) {
+	public boolean insertarAlFinal(AristaGrafo pDato) {
 		if(pDato == null) {
 			I.Log("pDato null, insercion fallida");
-			return;
+			return false;
 		}
 		
 		NodoLista nuevoNodo = new NodoLista();
@@ -221,6 +242,7 @@ public class ListaAristas {
 		}
 		
 		largo++; 
+		return true;
 	}
 
 	public void insertarAlPrincipio(AristaGrafo pDato) {

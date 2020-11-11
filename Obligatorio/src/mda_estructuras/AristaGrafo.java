@@ -16,8 +16,8 @@ public class AristaGrafo {
 	}
 	
 	public AristaGrafo() {
-		a = null;
-		b = null;
+		a = new VerticeGrafo();
+		b = new VerticeGrafo();
 		distancia = -1;
 		tiempo = -1;
 	}

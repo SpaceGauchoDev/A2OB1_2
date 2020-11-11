@@ -70,9 +70,11 @@ public class ABB_Usuarios {
 			r.iteraciones = 0;
 			r.resultado = false;
 			r.usuario = null;
+			
+			return r;
 		}
 		
-		//raiz.iteraciones = 0;
+		raiz.iteraciones = 0;
 		NodoABB nodo = buscarABB(raiz, pEmail, 0);
 		
 		r.usuario = nodo.datoUsuario;
@@ -91,9 +93,11 @@ public class ABB_Usuarios {
         	//busquedaFallida.datoUsuario = null; // esto ya se setea como null con el constructor por defecto de NodoABB
         	return busquedaFallida;
         } else if (pNodo.datoUsuario.email == pEmail) {
-        	pNodo.iteraciones = pIteraciones;
+        	pNodo.iteraciones = pIteraciones +1;
         	return pNodo;
         }
+        
+        pIteraciones++; 
         
 		// buscamos el orden de comparación
 		Abecedario abc = new Abecedario();
@@ -101,10 +105,12 @@ public class ABB_Usuarios {
 		
         if (orden < 0) {
         	I.Log("busca izquierda");
-        	return buscarABB(pNodo.izq, pEmail, pIteraciones +1);
+        	//return buscarABB(pNodo.izq, pEmail, pIteraciones +1);
+        	return buscarABB(pNodo.izq, pEmail, pIteraciones);
         }else {
         	I.Log("busca derecha");
-        	return buscarABB(pNodo.der, pEmail, pIteraciones +1);
+        	//return buscarABB(pNodo.der, pEmail, pIteraciones +1);
+        	return buscarABB(pNodo.der, pEmail, pIteraciones);
         }
 	}
 	
@@ -190,7 +196,7 @@ public class ABB_Usuarios {
 	}
 	
 	private NodoABB derIzq(NodoABB pNodo) {
-		pNodo.der = rotarADer(pNodo.izq);
+		pNodo.der = rotarADer(pNodo.der);
 	    return derDer(pNodo);
 	}
 	

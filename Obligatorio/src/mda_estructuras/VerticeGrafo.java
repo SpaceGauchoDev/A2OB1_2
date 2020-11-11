@@ -7,8 +7,19 @@ public class VerticeGrafo {
 	public TipoDeVertice tipoDeVertice;
 	public String cedulaDelivery;
 	public String matriculaMovil;
+	public boolean activo;
 	public int indice;
 	
+	
+	/*
+	public void activar() {
+		activo = true;
+	}
+	
+	public void desactivar() {
+		activo = false;
+	}
+	*/
 	
 	public String toString() {
 		return "pos: " + posicion.toString() + " |tipoDeVertice: " + tipoDeVertice; 
@@ -25,5 +36,6 @@ public class VerticeGrafo {
 		cedulaDelivery = "";
 		matriculaMovil = "";
 		indice = 0;
+		activo = false;
 	}
 }

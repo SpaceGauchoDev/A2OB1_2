@@ -41,7 +41,7 @@ public interface ISistema {
 	Retorno deliveryMasCercano(double coordXi, double coordYi);
 	 
 	// Restricción de eficiencia: ????	
-	Retorno caminoMinimoMovil(double coordXi, double coordYi, double coordXf, double coordYf);
+	Retorno caminoMinimoMovil(Double coordXi, Double coordYi, Double coordXf, Double coordYf, String email);
 
 	// Restricción de eficiencia: ????	
 	Retorno caminoMinimoDelivery(double coordXi, double coordYi, double coordXf, double coordYf);
