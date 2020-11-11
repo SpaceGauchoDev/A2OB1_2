@@ -123,6 +123,14 @@ public class ABB_Usuarios {
 		return resultado;
 	}
 	
+	//TODO: implementar eliminar nodos en ABB_Usuarios
+	public boolean eliminarUsuario (String pEmail) {
+		boolean resultado = false;
+		I.Log("ABB_Usuarios/eliminarUsuario no implementado");
+		
+		return resultado;
+	}
+	
 	
 	public boolean insertarUsuario (Usuario pUsuario) {
 		boolean resultado = false;
