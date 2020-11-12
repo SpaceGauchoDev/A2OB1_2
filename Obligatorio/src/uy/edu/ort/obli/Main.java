@@ -8,48 +8,63 @@ public class Main {
 	public static void main(String[] args) {
 		I.Log("Start");
 		
-		Grafo mapa = new Grafo(10);
+		Grafo mapa = new Grafo(6);
 		
-		Geoloc g1 = new Geoloc(1.0,1.0);
-		mapa.inicializarVerticeEsquina(g1);
+		Geoloc gA = new Geoloc(-34.9041699,-56.1946491);
+		Geoloc gB = new Geoloc(-34.9065014,-56.1895629);
+		Geoloc gC = new Geoloc(-34.9058486,-56.1913223);
+		Geoloc gD = new Geoloc(-34.9039313,-56.1915286);
+		Geoloc gE = new Geoloc(-34.9038551,-56.1904163);
+		Geoloc gF = new Geoloc(-34.9048658,-56.1914352);
 		
-		Geoloc g2 = new Geoloc(2.0,2.0);
-		mapa.inicializarVerticeEsquina(g2);
-
-		Geoloc g3 = new Geoloc(3.0,3.0);
-		mapa.inicializarVerticeEsquina(g3);
+		mapa.inicializarVerticeEsquina(gA);
+		mapa.inicializarVerticeMovil(gB, "123");
+		mapa.inicializarVerticeDelivery(gC, "AAA");
+		mapa.inicializarVerticeEsquina(gD);
+		mapa.inicializarVerticeDelivery(gE, "BBB");
+		mapa.inicializarVerticeMovil(gF, "456");
 		
-		Geoloc g4 = new Geoloc(4.0,4.0);
-		mapa.inicializarVerticeEsquina(g4);
-		
-		mapa.crearArista(g1, g2, 10, 10);
-		
-		I.Log("ble");
-		
-		boolean busqueda1 = mapa.existeArista(g1, g2);
-		//AristaGrafo busqueda2 = mapa.existeArista(g3, g4);
-		//AristaGrafo busqueda3 = mapa.existeArista(g2, g3);
-		
-		if(busqueda1) {
-			I.Log("busqueda 1 encontro!");
-		}else {
-			I.Log("busqueda 1 no encontro!");
-		}
+		String apiKey = "AIzaSyC2kHGtzaC3OOyc7Wi1LMBcEwM9btRZLqw";
+		PaginaWeb web = new PaginaWeb(apiKey, mapa.obtenerVerticesInicializados());
+		web.EscribirArchivo();
+		web.EjecutarArchivo();
 		
 		/*
-		if(busqueda2 != null) {
-			I.Log("busqueda 2 encontro!");
-		}else {
-			I.Log("busqueda 2 no encontro!");
-		}
+		mapa.crearArista(gA, gB, 2, 10);
+		mapa.crearArista(gB, gD, 8, 10);
+		mapa.crearArista(gF, gB, 3, 10);
+		mapa.crearArista(gF, gC, 2, 10);
+		mapa.crearArista(gC, gD, 1, 10);
+		mapa.crearArista(gC, gE, 4, 10);
+		mapa.crearArista(gE, gA, 1, 10);
 		
-		if(busqueda3 != null) {
-			I.Log("busqueda 3 encontro!");
-		}else {
-			I.Log("busqueda 3 no encontro!");
+
+		VerticeGrafo vA = mapa.existeVerticeInicializado(gA);
+		VerticeGrafo vB = mapa.existeVerticeInicializado(gB);
+		VerticeGrafo vC = mapa.existeVerticeInicializado(gC);
+		VerticeGrafo vD = mapa.existeVerticeInicializado(gD);
+		VerticeGrafo vE = mapa.existeVerticeInicializado(gE);
+		VerticeGrafo vF = mapa.existeVerticeInicializado(gF);
+		*/
+		
+		
+		/*
+		if(mapa.existeAlgunMovilDisponible()) {
+			I.Log("existe movil disponible");
 		}
 		*/
-
+		
+		//mapa.distanciaAMovilActivoMasCercano(vA);
+		
+		/*
+		mapa.deliveryActivoMasCercano(vC, vE);
+		
+		mapa.deliveryActivoMasCercano(vA, vE);
+		
+		mapa.deliveryActivoMasCercano(vF, vE);
+		
+		mapa.deliveryActivoMasCercano(vA, vF);
+		*/
 
 		I.Log("preEnd");
 		I.Log("End");

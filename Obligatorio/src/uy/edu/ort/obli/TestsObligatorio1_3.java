@@ -275,7 +275,7 @@ public class TestsObligatorio1_3 {
 		assertEquals(Retorno.Resultado.OK, sistema.registrarMovil("001", 1.0, 1.0).resultado);
 		assertEquals(Retorno.Resultado.ERROR_2, sistema.registrarMovil("002", 1.0, 1.0).resultado); // mismas coordenadas
 	}
-	*/
+	
 	
 	@Test
 	public void testRegistrarTramoOK() {
@@ -344,8 +344,9 @@ public class TestsObligatorio1_3 {
 		assertEquals(Retorno.Resultado.OK, sistema.registrarTramo(1.0, 1.0, 2.0, 2.0, 10, 1).resultado);
 		assertEquals(Retorno.Resultado.ERROR_4, sistema.registrarTramo(1.0, 1.0, 2.0, 2.0, 10, 1).resultado);
 	}
+	
 
-	/*
+	
 	@Test
 	public void testMovilMasCercanoOK1() {
 		
@@ -385,10 +386,10 @@ public class TestsObligatorio1_3 {
 		assertEquals(Retorno.Resultado.OK, retorno.resultado);
 		assertEquals(23, retorno.valorEntero);
 
+		
 		retorno = sistema.movilMasCercano(1.0, 1.0);
 		assertEquals(Retorno.Resultado.OK, retorno.resultado);
 		assertEquals(25, retorno.valorEntero);
-		
 	}
 
 	@Test
@@ -449,6 +450,7 @@ public class TestsObligatorio1_3 {
 		
 	}
 
+	/*
 	@Test
 	public void testDeliveryMasCercanoOK1() {
 		
@@ -554,7 +556,9 @@ public class TestsObligatorio1_3 {
 		assertEquals(Retorno.Resultado.ERROR_2, retorno.resultado);
 		
 	}
+	*/
 
+	
 	@Test
 	public void testCaminoMinimoMovilOK1() {
 		
@@ -612,6 +616,7 @@ public class TestsObligatorio1_3 {
 		
 	}
 
+	
 	@Test
 	public void testCaminoMinimoDeliveryOK1() {
 		
@@ -667,6 +672,6 @@ public class TestsObligatorio1_3 {
 		assertEquals(Retorno.Resultado.ERROR_1, retorno.resultado);
 		
 	}
-	*/
+	
 
 }

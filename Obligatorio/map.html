@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <head>
+        <title>Map</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>  
+    <style>
+       /* Set the size of the div element that contains the map */
+	   #container{
+		width = 100%; 
+		display:flex;
+		align-items: center;
+		flex-direction: column;
+		justify-content: center;
+	   }
+	   
+      #map {
+        height: 600px;  /* The height is 400 pixels */
+        width: 1200px;  /* The width is the width of the web page */
+       }
+    </style>
+  </head>
+  <body>
+	<div id="container">
+    <h3>My Google Maps Demo</h3>
+    <!--The div element for the map -->
+    <div id="map"></div>
+	</div>
+    <script>
+// Initialize and add the map
+function initMap() {
+  // The location of Uluru
+var uluru0 = {lat: -34.9041699, lng: -56.1946491};
+var uluru1 = {lat: -34.9065014, lng: -56.1895629};
+var uluru2 = {lat: -34.9058486, lng: -56.1913223};
+var uluru3 = {lat: -34.9039313, lng: -56.1915286};
+var uluru4 = {lat: -34.9038551, lng: -56.1904163};
+var uluru5 = {lat: -34.9048658, lng: -56.1914352};
+var imagenEsquina = "marker_Amarillo.png";
+var imagenDeliveryActivo = "marker_Verde_D.png";
+var imagenDeliveryInactivo = "marker_Rojo_D.png";
+var imagenMovilActivo = "marker_Verde_M.png";
+var imagenMovilInactivo = "marker_Rojo_M.png";
+  // The map, centered at Uluru
+  var map = new google.maps.Map(
+      document.getElementById('map'), {zoom: 16, center: uluru0});
+  // The marker, positioned at Uluru
+var marker = new google.maps.Marker({position: uluru0, map: map, icon: imagenEsquina});
+var marker = new google.maps.Marker({position: uluru1, map: map, icon: imagenMovilActivo});
+var marker = new google.maps.Marker({position: uluru2, map: map, icon: imagenDeliveryActivo});
+var marker = new google.maps.Marker({position: uluru3, map: map, icon: imagenEsquina});
+var marker = new google.maps.Marker({position: uluru4, map: map, icon: imagenDeliveryActivo});
+var marker = new google.maps.Marker({position: uluru5, map: map, icon: imagenMovilActivo});
+}
+    </script>
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2kHGtzaC3OOyc7Wi1LMBcEwM9btRZLqw&callback=initMap">
+ </script>
+  </body>
+</html>

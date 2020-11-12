@@ -1,6 +1,7 @@
 package uy.edu.ort.obli;
 import mda_estructuras.*;
 import mda_utilidades.I;
+import mda_utilidades.PaginaWeb;
 import uy.edu.ort.obli.Retorno.Resultado;
 
 public class Sistema implements ISistema {
@@ -210,27 +211,138 @@ public class Sistema implements ISistema {
 
 	@Override
 	public Retorno movilMasCercano(double coordXi, double coordYi) {
-		return new Retorno(Resultado.NO_IMPLEMENTADA);
+		Retorno r;
+			
+		Geoloc puntoDeInicio = new Geoloc();
+		puntoDeInicio.lat = coordXi;
+		puntoDeInicio.lon = coordYi;
+		
+		VerticeGrafo verticeDeInicio = mapa.existeVerticeInicializado(puntoDeInicio);
+		
+		if(verticeDeInicio == null ) {
+			r = new Retorno(Resultado.ERROR_1);
+			return r;
+		}
+		
+		if(!mapa.existeAlgunMovilDisponible()) {
+			r = new Retorno(Resultado.ERROR_2);
+			return r;
+		}
+		
+		r = new Retorno(Resultado.OK);
+		
+		VerticeGrafo movil = mapa.movilActivoMasCercanoEnMetros(verticeDeInicio); 
+		r.valorEntero = movil.distanciaEnMetros;
+		movil.activo = false;
+		
+		return r;
 	}
 
 	@Override
 	public Retorno deliveryMasCercano(double coordXi, double coordYi) {
-		return new Retorno(Resultado.NO_IMPLEMENTADA);
+		Retorno r;
+		
+		Geoloc puntoDeInicio = new Geoloc();
+		puntoDeInicio.lat = coordXi;
+		puntoDeInicio.lon = coordYi;
+		
+		VerticeGrafo verticeDeInicio = mapa.existeVerticeInicializado(puntoDeInicio);
+		
+		if(verticeDeInicio == null ) {
+			r = new Retorno(Resultado.ERROR_1);
+			return r;
+		}
+		
+		if(!mapa.existeAlgunDeliveryDisponible()) {
+			r = new Retorno(Resultado.ERROR_2);
+			return r;
+		}
+		
+		VerticeGrafo delivery = mapa.deliveryActivoMasCercanoEnAristas(verticeDeInicio);
+		r = new Retorno(Resultado.OK);
+		r.valorEntero = delivery.distanciaEnAristas;
+		r.valorString = delivery.posicion.toString();
+		delivery.activo = false;
+		
+		return r;
 	}
 
 	@Override
 	public Retorno caminoMinimoMovil(Double coordXi, Double coordYi, Double coordXf, Double coordYf, String email) {
-		return new Retorno(Resultado.NO_IMPLEMENTADA);
+		Retorno r;
+		
+		Geoloc puntoDeInicio = new Geoloc();
+		puntoDeInicio.lat = coordXi;
+		puntoDeInicio.lon = coordYi;
+		
+		Geoloc puntoDeFin = new Geoloc();
+		puntoDeFin.lat = coordXf;
+		puntoDeFin.lon = coordYf;
+
+		VerticeGrafo verticeDeInicio = mapa.existeVerticeInicializado(puntoDeInicio);
+		VerticeGrafo verticeDeFin = mapa.existeVerticeInicializado(puntoDeFin);
+		
+		if(verticeDeInicio == null || verticeDeFin == null) {
+			r = new Retorno(Resultado.ERROR_1);
+			return r;
+		}
+		
+		
+		r = new Retorno(Resultado.OK);
+		ResultadoBusquedaUsuario busqueda = arbolDeUsuarios.buscarUsuario(email);
+		busqueda.usuario.destinosVisitados.insertarOIncrementar(puntoDeFin);
+		
+		VerticeGrafo caminoMinimo = mapa.caminoMasCortoParaMovilEnMetros(verticeDeInicio, verticeDeFin); 
+		r.valorEntero = caminoMinimo.distanciaEnMetros;
+		r.valorString = caminoMinimo.caminoRecorrido;
+		
+		return r;
 	}
 
 	@Override
 	public Retorno caminoMinimoDelivery(double coordXi, double coordYi, double coordXf, double coordYf) {
-		return new Retorno(Resultado.NO_IMPLEMENTADA);
+		Retorno r;
+		
+		Geoloc puntoDeInicio = new Geoloc();
+		puntoDeInicio.lat = coordXi;
+		puntoDeInicio.lon = coordYi;
+		
+		Geoloc puntoDeFin = new Geoloc();
+		puntoDeFin.lat = coordXf;
+		puntoDeFin.lon = coordYf;
+
+		VerticeGrafo verticeDeInicio = mapa.existeVerticeInicializado(puntoDeInicio);
+		VerticeGrafo verticeDeFin = mapa.existeVerticeInicializado(puntoDeFin);
+		
+		if(verticeDeInicio == null || verticeDeFin == null) {
+			r = new Retorno(Resultado.ERROR_1);
+			return r;
+		}
+		
+		if(!mapa.existeAlgunDeliveryDisponible()) {
+			r = new Retorno(Resultado.ERROR_2);
+			return r;
+		}
+		
+		r = new Retorno(Resultado.OK);
+		
+		VerticeGrafo caminoMinimo = mapa.caminoMasCortoParaDeliveryEnMinutos(verticeDeInicio, verticeDeFin); 
+		r.valorEntero = caminoMinimo.distanciaEnMinutos;
+		r.valorString = caminoMinimo.caminoRecorrido;
+		
+		return r;
 	}
 
 	@Override
 	public Retorno dibujarMapa() {
-		return new Retorno(Resultado.NO_IMPLEMENTADA);
+		Retorno r = new Retorno(Resultado.OK);
+		
+		String apiKey = "AIzaSyC2kHGtzaC3OOyc7Wi1LMBcEwM9btRZLqw";
+		PaginaWeb web = new PaginaWeb(apiKey, mapa.obtenerVerticesInicializados());
+		web.EscribirArchivo();
+		web.EjecutarArchivo();
+		
+		return r;
 	}
 	
 	public Sistema() {

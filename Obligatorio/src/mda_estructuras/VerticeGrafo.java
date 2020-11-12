@@ -10,6 +10,10 @@ public class VerticeGrafo {
 	public boolean activo;
 	public int indice;
 	
+	public int distanciaEnAristas;
+	public int distanciaEnMetros;
+	public int distanciaEnMinutos;
+	public String caminoRecorrido;
 	
 	/*
 	public void activar() {
@@ -37,5 +41,8 @@ public class VerticeGrafo {
 		matriculaMovil = "";
 		indice = 0;
 		activo = false;
+		
+		distanciaEnAristas = 0;
+		distanciaEnMetros = 0;
 	}
 }

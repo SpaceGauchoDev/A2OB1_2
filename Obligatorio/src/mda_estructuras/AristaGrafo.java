@@ -1,6 +1,8 @@
 package mda_estructuras;
 
 public class AristaGrafo {
+	public static enum TipoDePeso {Distancia, Tiempo};
+	
 	public VerticeGrafo a;
 	public VerticeGrafo b;
 	public int distancia;

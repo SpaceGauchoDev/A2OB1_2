@@ -42,7 +42,7 @@ public class Geoloc {
 	}
 	
 	public String toString() {
-		return "lat: "+ lat + "lon: "+ lon;
+		return lat + ";" +lon;
 	}
 	
 	public Geoloc(double pLat, double pLon) {
